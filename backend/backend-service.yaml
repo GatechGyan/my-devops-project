@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-backend-service   # इस नाम से फ्रंटएंड बैकएंड को ढूंढ पाएगा
+spec:
+  selector:
+    app: node-backend          # यह ऊपर वाले डिप्लॉयमेंट से मैच होना चाहिए
+  ports:
+    - protocol: TCP
+      port: 5000               # सर्विस का पोर्ट
+      targetPort: 5000         # कंटेनर का अंदरूनी पोर्ट
+  type: ClusterIP              # यह इसे क्लस्टर के अंदर सुरक्षित रखता है

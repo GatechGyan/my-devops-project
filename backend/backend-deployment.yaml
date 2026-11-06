@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment        # यह कुबेरनेट्स को बताता है कि हम एक ऐप डिप्लॉय कर रहे हैं
+metadata:
+  name: node-backend-deployment
+  labels:
+    app: node-backend
+spec:
+  replicas: 2           # जादुई लाइन! यह आपके बैकएंड के 2 डुप्लिकेट्स (Pods) हमेशा लाइव रखेगी
+  selector:
+    matchLabels:
+      app: node-backend
+  template:
+    metadata:
+      labels:
+        app: node-backend
+    spec:
+      containers:
+      - name: node-backend-container
+        image: node-backend:latest  # प्रोजेक्ट 2 वाली डॉकर इमेज का नाम
+        imagePullPolicy: Never      # क्योंकि हमारी इमेज लोकल लैपटॉप पर है, इंटरनेट से डाउनलोड नहीं करनी है
+        ports:
+        - containerPort: 5000       # बैकएंड कंटेनर का अंदरूनी पोर्ट

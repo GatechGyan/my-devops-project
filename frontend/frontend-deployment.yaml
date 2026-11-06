@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-frontend-deployment
+  labels:
+    app: react-frontend
+spec:
+  replicas: 2           # फ्रंटएंड के भी 2 डुप्लिकेट्स लाइव रहेंगे
+  selector:
+    matchLabels:
+      app: react-frontend
+  template:
+    metadata:
+      labels:
+        app: react-frontend
+    spec:
+      containers:
+      - name: react-frontend-container
+        image: react-frontend:latest # प्रोजेक्ट 2 वाली फ्रंटएंड डॉकर इमेज
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80         # Nginx का अंदरूनी पोर्ट
