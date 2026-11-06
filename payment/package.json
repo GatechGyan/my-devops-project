@@ -1,0 +1,12 @@
+{
+  "name": "payment-module",
+  "version": "1.0.0",
+  "description": "DevOps Project - Payment Mock Module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

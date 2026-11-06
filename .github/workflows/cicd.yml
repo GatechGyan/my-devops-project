@@ -24,6 +24,10 @@ jobs:
       run: |
         docker build -t node-backend:latest ./backend
 
+    # 💳 स्टेप 5: नए पेमेंट मॉड्यूल की डॉकर इमेज बनाना
+    - name: Build Payment Docker Image
+      run: |
+        docker build -t payment-module:latest ./payment
     # 📋 स्टेप 4: यह चेक करना कि क्या दोनों इमेजेस सही-सलामत बन गईं
     - name: Verify Docker Images
       run: |
