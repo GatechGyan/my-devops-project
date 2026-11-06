@@ -1,0 +1,30 @@
+name: Project 3 CI-CD Pipeline
+
+# 🎯 यह रोबोट कब जागेगा? जब आप 'main' ब्रांच पर नया कोड पुश करेंगे
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # यह कोड GitHub के मुफ़्त क्लाउड कंप्यूटर पर चलेगा
+
+    steps:
+    # 🚚 स्टेप 1: आपका सारा कोड GitHub के कंप्यूटर के अंदर लाना
+    - name: Checkout Repository Code
+      uses: actions/checkout@v3
+
+    # 🐳 स्टेप 2: फ्रंटएंड की डॉकर इमेज बनाना (बिल्ड करना)
+    - name: Build Frontend Docker Image
+      run: |
+        docker build -t react-frontend:latest ./frontend
+
+    # 📡 स्टेप 3: बैकएंड की डॉकर इमेज बनाना
+    - name: Build Backend Docker Image
+      run: |
+        docker build -t node-backend:latest ./backend
+
+    # 📋 स्टेप 4: यह चेक करना कि क्या दोनों इमेजेस सही-सलामत बन गईं
+    - name: Verify Docker Images
+      run: |
+        docker images
